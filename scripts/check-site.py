@@ -20,9 +20,21 @@ for p in root.glob('*.js'):
   if not (root/v).is_file():fail.append(v)
 d=json.loads((root/'data/museum.json').read_text())
 for era in d['eras']:
- for path in [era['background'],era['showImage']]+[o['image'] for o in era['objects']]:
+ for path in [era['background'],era['showImage'],era['television']['image']]+[o['image'] for o in era['objects']]:
   if not (root/path).is_file():fail.append(path)
 assert not fail,fail
 assert 'figma.com' not in (root/'index.html').read_text()
 assert 'museum.html?era=0' in (root/'index.html').read_text()
 print('OK: all local links, fonts, 55 exhibit images and 5 corridors; entrance opens the site museum.')
+
+class VisibleCopy(HTMLParser):
+ def __init__(self):super().__init__();self.text=[];self.disclosures=0
+ def handle_starttag(self,tag,attrs):
+  if tag=='details':self.disclosures+=1
+ def handle_data(self,text):self.text.append(text)
+entrance=VisibleCopy();entrance.feed((root/'index.html').read_text());visible=' '.join(' '.join(entrance.text).split())
+assert entrance.disclosures==0,'Editorial text must remain open'
+for paragraph in d['intro'].split('\n\n'):assert ' '.join(paragraph.split()) in visible,'An intro paragraph is missing'
+assert 'hero-subtitle' in (root/'index.html').read_text(),'Hero subtitle must remain visible'
+assert len({e['television']['image'] for e in d['eras']})==5,'Each era needs its own television'
+print('OK: subtitle, full open editorial text, and five distinct era televisions.')

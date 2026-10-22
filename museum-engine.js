@@ -7,5 +7,9 @@ export function travelGeometry(count,viewportHeight){const screenDepth=objectDep
 export function cameraPosition(scroll,geometry){return clamp(scroll/geometry.approachDistance)*geometry.depth;}
 export function objectPosition(index,width,height){const [x,y,scale,tilt]=placements[index%placements.length],mobile=width<=600;return {x:x*width*(mobile?.55:1),y:(mobile ? (index % 2 ? .18+y*.2 : -.31+y*.2) : y)*height,z:objectDepth(index),scale,tilt};}
 export function displaySize(aspect,index,width,height){const p=placements[index%placements.length],scale=p[2],mobile=width<=600,maxW=Math.min(mobile?width*.82:width*.48,650)*scale,maxH=Math.min(mobile?height*.34:height*.76,480)*scale;let w=maxW,h=w/aspect;if(h>maxH){h=maxH;w=h*aspect;}return {width:w,height:h};}
-export function visibility(depth,camera){const relative=depth-camera;if(relative< -120||relative>2700)return 0;return clamp(Math.min((relative+120)/360,(2700-relative)/900));}
+// Items stay opaque from the vanishing point until they leave through the sides.
+// Only cull behind the projection plane, where CSS would otherwise mirror them.
+export function visibility(depth,camera,perspective=1000){return depth-camera> -perspective+30?1:0;}
+export function corridorScale(scroll,geometry){return 1+clamp(scroll/geometry.approachDistance)*.8;}
+
 export function endReached(scroll,geometry){return scroll>=geometry.scrollDistance-2;}

@@ -10,6 +10,5 @@ export function displaySize(aspect,index,width,height){const p=placements[index%
 // Items stay opaque from the vanishing point until they leave through the sides.
 // Only cull behind the projection plane, where CSS would otherwise mirror them.
 export function visibility(depth,camera,perspective=1000){return depth-camera> -perspective+30?1:0;}
-export function corridorScale(scroll,geometry){return 1+clamp(scroll/geometry.approachDistance)*.8;}
 
 export function endReached(scroll,geometry){return scroll>=geometry.scrollDistance-2;}

@@ -28,3 +28,6 @@
 .enter .primary,.watch-programme{background:var(--vk-red);color:white;font-size:20px;font-weight:700}.enter .primary:hover,.watch-programme:hover{background:#e62238}.enter .primary:focus-visible,.watch-programme:focus-visible{outline:3px solid white;outline-offset:5px}
 
 .partner-links{height:34px;display:flex;align-items:center;justify-content:space-between}.partner-links>a{display:flex;align-items:center;height:44px;pointer-events:auto}.partner-links .partner-vk{width:64.27%}.partner-links .partner-nen{width:25.79%}.partner-links img{display:block;width:100%;height:34px;object-fit:contain}.partner-links a:focus-visible{outline:2px solid white;outline-offset:4px;border-radius:4px}.fixed-header>.partner-links{visibility:hidden}.fixed-header.is-visible>.partner-links{visibility:visible}@media(max-width:600px){.partner-links img{height:26px}.partner-links{height:26px}}
+
+/* One attribution before the entire comment; the speech is continuous prose. */
+.speaker .identity{align-items:flex-start}.speaker .identity .credentials{font-size:14px;line-height:1.4;margin-top:8px;max-width:50ch}.speaker-copy p{font-size:20px;line-height:1.5}.speaker-copy p+p{margin-top:18px}@media(max-width:600px){.speaker .identity .credentials{font-size:13px}.speaker-copy p{font-size:18px}}

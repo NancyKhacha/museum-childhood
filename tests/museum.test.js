@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {travelGeometry,objectPosition,visibility} from '../museum-engine.js';import {readFile} from 'node:fs/promises';
+const data=JSON.parse(await readFile(new URL('../data/museum.json',import.meta.url)));
+test('every era leaves room to reach its last exhibit and TV story on mobile and desktop',()=>{for(const e of data.eras)for(const height of [568,844,1080]){const g=travelGeometry(e.objects.length,height),last=objectPosition(e.objects.length,390,height);assert.ok(g.scrollDistance>0);assert.ok(visibility(last.z,g.depth)>.18,`${e.label}: last TV must remain reachable`);}});
+test('objects disappear before the camera can cross their projection plane',()=>{assert.equal(visibility(600,1700),0);assert.equal(visibility(5000,0),0);assert.ok(visibility(600,0)>.18);});
+test('source content has all five eras and all 55 real object texts',()=>{assert.equal(data.eras.length,5);assert.equal(data.eras.reduce((sum,e)=>sum+e.objects.length,0),55);for(const e of data.eras){assert.ok(e.about.length>300);assert.ok(e.show.length>500);for(const o of e.objects)assert.ok(o.body.length>100);}});

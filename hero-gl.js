@@ -22,8 +22,8 @@ if(hero&&logo&&!reduced.matches){
   function draw(now){frame=0;if(!loaded||document.hidden||reduced.matches)return;const time=(now-started)/1000,visible=scrollY<hero.offsetHeight;
    wordmark.resize(690,345);wordmark.clear();wordmark.draw(logoAsset,{x:345,y:172.5,w:690,h:345},{time,material:.8});
    if(visible){const h=hero.getBoundingClientRect();scene.resize(h.width,h.height);scene.clear();for(const [i,c]of clouds.entries()){const r=contained(c.asset.image,c.el.getBoundingClientRect(),h);r.y+=Math.sin(time*.25+i)*4;scene.draw(c.asset,r,{time,phase:i*1.7,material:.75});}
-    let entering=0;for(const [i,b]of heads.entries()){const age=time-(.4+i*1.3);if(age<0)continue;const progress=clamp(age/3.4),ease=.5-.5*Math.cos(Math.PI*progress),r=contained(b.asset.image,b.el.getBoundingClientRect(),h);const target=r.y;r.y=(-r.h*.7)+(target+r.h*.7)*ease+Math.sin(time*.52+i*1.2)*5*ease;r.x+=Math.sin(time*.30+i)*4*ease;const tilt=Number.parseFloat(getComputedStyle(b.el).getPropertyValue('--rot'))||0;scene.draw(b.asset,r,{time,phase:i*.9,angle:(tilt*Math.PI/180)*ease+Math.sin(time*.35+i)*.025,material:.23,opacity:clamp(age/.5)});if(progress<1)entering++;}
-    hero.dataset.enteredHeads=String(heads.filter((_,i)=>time>=.4+i*1.3).length);
+    let entering=0;for(const [i,b]of heads.entries()){const age=time-(.4+i*1.6);if(age<0)continue;const progress=clamp(age/5),ease=progress*progress*progress*(progress*(progress*6-15)+10),r=contained(b.asset.image,b.el.getBoundingClientRect(),h);const target=r.y;r.y=(-r.h*.7)+(target+r.h*.7)*ease+Math.sin(time*.52+i*1.2)*5*ease;r.x+=Math.sin(time*.30+i)*4*ease;const tilt=Number.parseFloat(getComputedStyle(b.el).getPropertyValue('--rot'))||0;scene.draw(b.asset,r,{time,phase:i*.9,angle:(tilt*Math.PI/180)*ease+Math.sin(time*.35+i)*.025,material:.23,opacity:clamp(age/1.2)});if(progress<1)entering++;}
+    hero.dataset.enteredHeads=String(heads.filter((_,i)=>time>=.4+i*1.6).length);
     frame=requestAnimationFrame(draw);
    }
   }

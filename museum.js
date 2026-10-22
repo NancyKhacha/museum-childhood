@@ -1,6 +1,6 @@
-import {CorridorScene} from './corridor-scene.js?v=20261022-r9';
-import {readerAtEnd,finalSections} from './room-math.js?v=20261022-r9';
-import {clamp,travelGeometry,objectPosition,visibility,cameraPosition,endReached,displaySize} from './museum-engine.js?v=20261022-r9';
+import {CorridorScene} from './corridor-scene.js?v=20261022-r10';
+import {readerAtEnd,finalSections} from './room-math.js?v=20261022-r10';
+import {clamp,travelGeometry,objectPosition,visibility,cameraPosition,endReached,displaySize} from './museum-engine.js?v=20261022-r10';
 const $=id=>document.getElementById(id),world=$('world'),travel=$('travel'),room=$('room'),reader=$('reader'),content=$('reader-content'),tabs=$('era-tabs'),reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const corridor=new CorridorScene($('corridor-view'),room);
 let restoreOnClose=true,readerEra=0,finalRead=false,lastFinalWheel=0,finalGestureStartedAtBottom=false,finalTouchStartedAtBottom=false,returningHome=false;
@@ -19,14 +19,14 @@ function showFinal(){const sections=finalSections(data),speaker=data.finalSpeake
  openReader('«Спокушки» сегодня','',{kind:'final',extra:n=>{
   const identity=element('figure',{class:'final-speaker'},[element('img',{src:speaker.photo,alt:speaker.name,width:128,height:166}),element('figcaption',{},[element('h3',{text:speaker.name}),element('p',{text:speaker.role})])]);
   const credit=element('small',{class:'photo-credit'},[document.createTextNode('Фото: '),element('a',{href:speaker.creditUrl,target:'_blank',rel:'noopener noreferrer',text:speaker.credit}),document.createTextNode(' · '),element('a',{href:speaker.license,target:'_blank',rel:'noopener noreferrer',text:'CC BY 4.0'})]);
-  const editorial=element('section',{class:'final-editorial'},[element('h3',{text:'Передача сегодня'}),...paragraphs(sections.intro.join('\n\n'))]);
+  const editorial=element('section',{class:'final-editorial'},paragraphs(sections.intro.join('\n\n')));
   const photo=element('figure',{class:'reader-figure'},[element('img',{class:'reader-image',src:data.eras[4].showImage,alt:'Герои передачи «Спокойной ночи, малыши!»',width:1200,height:800}),element('figcaption',{text:data.eras[4].showImageCaption})]);
   editorial.append(photo,...paragraphs(sections.programme.join('\n\n')),...paragraphs(sections.ending.join('\n\n')));
-  n.append(identity,credit,element('div',{class:'final-comment'},paragraphs(sections.comment.join('\n\n'))),editorial,watchButton());
+  n.append(editorial,identity,credit,element('div',{class:'final-comment'},paragraphs(sections.comment.join('\n\n'))),watchButton());
  }});if(atReaderEnd())finalRead=true;
 }
 function atReaderEnd(){return readerAtEnd(reader.scrollTop,reader.clientHeight,reader.scrollHeight);}
-function returnToCover(){if(returningHome)return;returningHome=true;location.assign('index.html?v=20261022-r9#start');}
+function returnToCover(){if(returningHome)return;returningHome=true;location.assign('index.html?v=20261022-r10#start');}
 reader.addEventListener('scroll',()=>{if(dialogKind==='final'&&atReaderEnd())finalRead=true;},{passive:true});
 
 function showProgramme(){if(eraIndex===4){showFinal();return;}const era=data.eras[eraIndex];openReader('«Спокойной ночи, малыши!»',era.show,{image:era.showImage,caption:era.showImageCaption,kind:'show',extra:n=>n.append(watchButton())});}
@@ -74,5 +74,5 @@ addEventListener('touchstart',e=>{touchY=e.touches[0]?.clientY||0;finalTouchStar
 addEventListener('touchmove',e=>{const delta=touchY-(e.touches[0]?.clientY||0);if(finalTouchStartedAtBottom&&delta>45){e.preventDefault();returnToCover();return;}if(reader.open&&dialogKind==='epoch'&&!content.contains(e.target)&&Math.abs(delta)>14){e.preventDefault();closeReader();}},{passive:false});
 addEventListener('keydown',e=>{if(e.repeat||e.shiftKey||!['ArrowDown','PageDown',' '].includes(e.key))return;if(e.key===' '&&e.target.closest('button,a'))return;if(eraIndex===4&&finalRead&&(!reader.open||(dialogKind==='final'&&atReaderEnd()))){e.preventDefault();returnToCover();}});
 
-async function boot(){const response=await fetch('data/museum.json?v=20261022-r9');if(!response.ok)throw Error('content');data=await response.json();try{positions=JSON.parse(sessionStorage.getItem('museum-positions-v4')||'{}');}catch{}for(const [i,era]of data.eras.entries()){const label=innerWidth<=600?['60–80-е','90-е','00-е','10-е','20-е'][i]:era.label;const b=element('button',{type:'button',role:'tab','aria-controls':'museum-stage','aria-selected':false,text:label});b.addEventListener('click',()=>{if(i===eraIndex)showEpoch();else selectEra(i,{transition:true});});b.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const target=e.key==='Home'?0:e.key==='End'?4:(i+(e.key==='ArrowRight'?1:4))%5;selectEra(target,{transition:true});tabs.children[target].focus({preventScroll:true});});tabs.append(b);}const param=Number(new URLSearchParams(location.search).get('era'));selectEra(Number.isInteger(param)?clamp(param,0,4):0,{restore:false});}
+async function boot(){const response=await fetch('data/museum.json?v=20261022-r10');if(!response.ok)throw Error('content');data=await response.json();try{positions=JSON.parse(sessionStorage.getItem('museum-positions-v4')||'{}');}catch{}for(const [i,era]of data.eras.entries()){const label=innerWidth<=600?['60–80-е','90-е','00-е','10-е','20-е'][i]:era.label;const b=element('button',{type:'button',role:'tab','aria-controls':'museum-stage','aria-selected':false,text:label});b.addEventListener('click',()=>{if(i===eraIndex)showEpoch();else selectEra(i,{transition:true});});b.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const target=e.key==='Home'?0:e.key==='End'?4:(i+(e.key==='ArrowRight'?1:4))%5;selectEra(target,{transition:true});tabs.children[target].focus({preventScroll:true});});tabs.append(b);}const param=Number(new URLSearchParams(location.search).get('era'));selectEra(Number.isInteger(param)?clamp(param,0,4):0,{restore:false});}
 boot().catch(()=>{const box=element('div',{class:'load-error',role:'alert'},[element('p',{text:'Не удалось открыть музей. Попробуйте обновить страницу.'})]);const retry=element('button',{type:'button',text:'Обновить'});retry.addEventListener('click',()=>location.reload());box.append(retry);document.body.append(box);});

@@ -1,4 +1,4 @@
-import {roomVolume} from './room-math.js?v=20261022-r9';
+import {roomVolume} from './room-math.js?v=20261022-r10';
 const vertex=`attribute vec2 aPosition;varying vec2 vUV;void main(){vUV=vec2(aPosition.x*.5+.5,.5-aPosition.y*.5);gl_Position=vec4(aPosition,0.,1.);}`;
 const fragment=`precision highp float;varying vec2 vUV;uniform sampler2D uImage;uniform vec2 uCover,uVanishing;uniform vec4 uBounds;uniform float uFocal,uAspect,uFar,uCamera;void main(){vec2 uv=(vUV-.5)*uCover+.5;vec3 ray=vec3((uv.x-uVanishing.x)*uAspect,uVanishing.y-uv.y,uFocal);float distance=(uFar-uCamera)/ray.z;if(ray.x<-.00001)distance=min(distance,uBounds.x/ray.x);if(ray.x>.00001)distance=min(distance,uBounds.y/ray.x);if(ray.y<-.00001)distance=min(distance,uBounds.z/ray.y);if(ray.y>.00001)distance=min(distance,uBounds.w/ray.y);vec3 hit=vec3(0.,0.,uCamera)+ray*distance;vec2 sourceUV=vec2(uVanishing.x+hit.x/hit.z*uFocal/uAspect,uVanishing.y-hit.y/hit.z*uFocal);gl_FragColor=texture2D(uImage,sourceUV);}`;
 export class CorridorScene{

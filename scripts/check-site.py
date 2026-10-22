@@ -38,3 +38,11 @@ for paragraph in d['intro'].split('\n\n'):assert ' '.join(paragraph.split()) in 
 assert 'hero-subtitle' in (root/'index.html').read_text(),'Hero subtitle must remain visible'
 assert len({e['television']['image'] for e in d['eras']})==5,'Each era needs its own television'
 print('OK: subtitle, full open editorial text, and five distinct era televisions.')
+
+for era in d['eras']:
+ assert len(era['experts'])==2
+ for expert in era['experts']:
+  assert (root/expert['photo']).is_file()
+assert 'Что говорят экскурсоводы' not in (root/'museum.js').read_text()
+assert 'pointermove' not in (root/'hero-gl.js').read_text()
+print('OK: epoch expert portraits and quotes are inline; the cover has no mouse repulsion.')

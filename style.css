@@ -18,3 +18,9 @@
 @media(max-width:600px){.hero-subtitle{top:54%;width:280px;font-size:20px}.project-copy{columns:1;font-size:18px;line-height:1.5}.project-copy p:first-child{font-size:20px}.project h1{margin-bottom:20px}.speaker-copy p{font-size:18px}.speaker-copy blockquote{font-size:24px}.hero{min-height:700px}}
 
 .hero,.morph-logo{user-select:none}.hero img,.morph-logo img{-webkit-user-drag:none}
+/* Each head enters its own place; there is no mouse-driven repulsion or pile. */
+.hero-partners{z-index:4}.down{z-index:5}.hero-scene{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}.hero.scene-active .cloud,.hero.scene-active .falling{opacity:0;animation:none}.falling{animation:head-arrival 3.4s ease-in-out both;animation-delay:calc(.4s + var(--order)*1.3s)}
+.face-a{left:4%;top:18%;width:160px;height:190px}.face-b{right:5%;top:12%;width:110px;height:185px}.face-c{left:20%;top:74%;width:120px;height:135px}.face-d{right:8%;top:70%;width:150px;height:150px}.face-e{left:7%;top:56%;width:130px;height:175px}.face-f{right:19%;top:4%;width:90px;height:115px}.face-g{left:31%;top:5%;width:95px;height:120px}
+@keyframes head-arrival{from{opacity:0;transform:translateY(-110vh) rotate(-8deg)}to{opacity:1;transform:translateY(0) rotate(0)}}
+@media(max-width:600px){.face-a{width:80px;height:95px;left:3%;top:13%}.face-b{width:70px;height:120px;right:5%;top:15%}.face-c{width:90px;height:100px;left:8%;top:70%}.face-d{width:98px;height:104px;right:6%;top:68%}.face-e{width:70px;height:95px;left:0;top:40%}.face-f{width:60px;height:80px;right:22%;top:77%}.face-g{width:62px;height:70px;left:40%;top:9%}}
+@media(prefers-reduced-motion:reduce){.falling{animation:none}}

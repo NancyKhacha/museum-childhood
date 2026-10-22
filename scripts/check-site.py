@@ -20,7 +20,7 @@ for p in root.glob('*.js'):
   if not (root/v).is_file():fail.append(v)
 d=json.loads((root/'data/museum.json').read_text())
 for era in d['eras']:
- for path in [era['background']]+[o['image'] for o in era['objects']]:
+ for path in [era['background'],era['showImage']]+[o['image'] for o in era['objects']]:
   if not (root/path).is_file():fail.append(path)
 assert not fail,fail
 assert 'figma.com' not in (root/'index.html').read_text()

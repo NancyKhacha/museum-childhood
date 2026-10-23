@@ -75,3 +75,15 @@
  .project-actions{gap:16px;margin-top:24px;display:grid}.project-actions .primary{width:100%;min-width:0}.watch-early{font-size:16px;max-width:none;line-height:1.4}
  .project{padding-top:24px}.project-copy p:first-child{font-size:18px}
 }
+/* The approved text stays verbatim; the existing entrance sits after its opening. */
+.project-lead{margin-bottom:0}.project-actions{margin:8px 0 34px}.project-continuation{padding-top:4px}
+.hero-subtitle{top:var(--subtitle-top,60%);width:min(650px,76%);font-size:26px;max-width:36ch}
+.puppet{width:96px;height:144px;animation:none;inset:auto;top:8%;left:6%}
+.puppet-window{display:block;width:100%;height:100%;overflow:hidden}
+.puppet img{display:block;width:100%;height:100%;max-width:none;object-fit:contain;transform:none}
+.puppet[data-cell] img{width:200%;transform:translateX(calc(var(--cell)*-50%))}
+.puppet-slot-1,.puppet-slot-5,.puppet-slot-9{left:auto;right:6%;top:20%}
+.puppet-slot-2,.puppet-slot-6,.puppet-slot-10{left:16%;top:70%}
+.puppet-slot-3,.puppet-slot-7,.puppet-slot-11{left:auto;right:13%;top:67%}
+.puppet-slot-4,.puppet-slot-8{left:25%;top:9%}
+@media(max-width:600px){.hero-subtitle{top:var(--subtitle-top,55%);width:280px;font-size:20px}.puppet{width:62px;height:93px}.project-actions{margin:4px 0 30px}.project-lead{columns:1}}

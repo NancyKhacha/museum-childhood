@@ -8,4 +8,4 @@ export function finalSections(data){
 // These dimensions stay in world units across the complete walk. Advancing the
 // camera cannot change a door's physical width, wallpaper scale or floor joints.
 export function corridorVolume(width,height,maxTravel){return {width,height,focal:width<=600?850:1000,halfWidth:480,halfHeight:390,far:maxTravel+4500};}
-export function smoothCamera(current,target,elapsed){return current+(target-current)*(1-Math.exp(-Math.min(elapsed,48)/135));}
+export function smoothCamera(current,target,elapsed){return current+(target-current)*(1-Math.exp(-Math.min(elapsed,48)/180));}

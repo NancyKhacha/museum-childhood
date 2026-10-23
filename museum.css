@@ -70,3 +70,10 @@
 /* Replaced media need an explicit height: intrinsic canvas ratios leave a gap. */
 .room,.corridor-view{height:calc(100% - var(--museum-top) - var(--museum-bottom))}
 .era-tabs button{white-space:nowrap}
+/* One persistent explanation replaces the repeated date and information icon. */
+.travel-hint{bottom:calc(var(--museum-bottom) + 16px);font-size:14px;padding:10px 16px}
+.reader[data-kind=show] .reader-image,.reader[data-kind=final]>.reader-content>.reader-figure .reader-image{height:auto;max-height:280px;object-fit:contain}
+.reader-content>.reader-figure:first-child{margin:0 0 26px}
+.reader-content>.watch-programme{margin-top:0;margin-bottom:28px}
+.reader[data-kind=object] .reader-content h2{margin-top:0}
+@media(max-width:600px){.travel-hint{bottom:calc(var(--museum-bottom) + 12px);font-size:12px;width:310px;max-width:calc(100% - 24px)}.reader[data-kind=show] .reader-image,.reader[data-kind=final]>.reader-content>.reader-figure .reader-image{max-height:180px}}

@@ -39,3 +39,34 @@
 .museum-header .partner-links img{height:30px}.room{pointer-events:none;will-change:transform}.world{pointer-events:none}.reader[data-kind=final]{width:min(900px,calc(100vw - 40px))}.final-speaker{display:flex;align-items:center;gap:28px;margin:32px 0 10px}.final-speaker img{width:128px;height:166px;object-fit:cover;object-position:50% 18%;border-radius:10px;flex-shrink:0}.final-speaker h3{font-size:25px;line-height:1.2}.final-speaker p{font-size:17px;line-height:1.4;margin-top:10px}.photo-credit{display:block;font-size:12px;margin-bottom:28px}.photo-credit a{text-decoration:underline;text-underline-offset:3px}.reader .photo-credit+p{margin-top:26px}@media(max-width:600px){.museum-header .partner-links img{height:21px}.final-speaker{gap:18px}.final-speaker img{width:90px;height:118px}.final-speaker h3{font-size:21px}.final-speaker p{font-size:14px}.reader[data-kind=final]{width:calc(100vw - 24px)}}
 
 .corridor-view{position:absolute;inset:96px 0 80px;width:100%;height:calc(100% - 176px);pointer-events:none}.corridor-view[hidden]{display:none}.room{transform:none!important}.reader[data-kind=final] .final-speaker{margin-top:32px}.final-editorial{margin:0}.final-editorial .reader-figure{margin-top:28px}.final-editorial .reader-image{height:auto;max-height:360px;object-fit:contain}.final-comment p+p{margin-top:24px}.reader[data-kind=final]{scroll-behavior:auto}@media(max-width:600px){.corridor-view{inset:88px 0 80px;height:calc(100% - 168px)}}
+/* The corridor fills the actual visible mobile viewport, including toolbar changes. */
+.museum-page{--museum-top:96px;--museum-bottom:80px}
+.museum-stage{height:100dvh;min-height:0}
+.room,.corridor-view,.gallery{inset:var(--museum-top) 0 var(--museum-bottom);width:100%;height:auto}
+.corridor-view{image-rendering:auto}
+.era-label{bottom:calc(var(--museum-bottom) + 14px)}
+.era-transition{top:var(--museum-top);bottom:var(--museum-bottom)}
+.era-transition::after{display:none}
+.artifact-visual{animation:none;transform:rotate(var(--tilt,0deg))}
+.exhibit:hover .artifact-visual{transform:rotate(var(--tilt,0deg))}
+.travel-hint{position:absolute;z-index:4;bottom:calc(var(--museum-bottom) + 78px);left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100% - 40px);padding:10px 16px;border-radius:12px;background:#eff6fff5;color:#002147;font-size:14px;line-height:1.4;text-align:center;pointer-events:none}
+.travel-hint>span{display:block}.travel-hint>span+span{margin-top:3px}.travel-hint[hidden],.travel-hint .touch-hint{display:none}
+.reader .epoch-watch-note{font-size:15px;line-height:1.5;margin-top:26px;max-width:42ch}
+.reader[data-kind=epoch] .watch-programme{min-width:0;min-height:48px;width:100%;padding:14px 18px;font-size:16px;margin-top:16px}
+.museum-header .museum-partners{width:224px;margin-left:auto}
+.museum-header .partner-links img{height:30px}
+@media(max-width:600px){
+ .museum-header{height:96px;padding:0 16px}
+ .museum-home{left:16px;top:2px;width:104px;height:52px}
+ .about-project{left:16px;right:auto;top:48px;min-height:44px;padding:0;font-size:13px}
+ .museum-header .museum-partners{right:16px;top:22px;width:186px;height:48px}
+ .museum-header .partner-links img{height:27px}
+ .museum-header .partner-links a{min-width:48px;min-height:48px}
+ .era-tabs{min-height:76px;gap:5px;padding:10px 8px max(10px,env(safe-area-inset-bottom))}
+ .travel-hint{bottom:calc(var(--museum-bottom) + 76px);font-size:12px;padding:9px 12px;width:300px;max-width:calc(100% - 32px)}
+ .travel-hint .desktop-hint{display:none}.travel-hint .touch-hint{display:block}
+ .exhibit:not(.show-exhibit)>span{font-size:17px;max-width:230px}
+}
+/* Replaced media need an explicit height: intrinsic canvas ratios leave a gap. */
+.room,.corridor-view{height:calc(100% - var(--museum-top) - var(--museum-bottom))}
+.era-tabs button{white-space:nowrap}
